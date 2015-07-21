@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
+</head>
+<body>
+    <div class="row text-center">
+        <h1>Dan's site</h1>
+        <hr>
+    </div>
+    
+    <div class="row">
+        {% block content %}{% endblock %}
+    </div>
+    
+    <div class="row text-center">
+        {% block footer %}
+        <hr>
+        {% if user.is_authenticated %}
+        <!--custom stylesheet to customize the page to user's preferences-->
+    <style>
+        .user-custom p {
+            font-family: "{{preferences.font}}";
+        }
+        .user-custom h2 {
+            font-family: "{{preferences.font}}";
+        }
+        
+    .user-custom h4 {
+            font-family: "{{preferences.font}}";
+        }
+        
+        .custom-button-class {
+            @include button;
+            background-color: {{preferences.colour}};
+}
+    </style>
+     <div class="user-custom">
+        <p>Logged in as {{user.username}}.</p>
+        
+        {% if user.is_staff %}
+        <p> Greetings glorious admin!</p>
+        {%endif%}
+        
+        <form action="/danapp/logoutview/">
+        <input class="custom-button-class" type="submit" value="Logout">
+        </form>
+        
+                <form action="/danapp/loggedin/">
+        <input class="custom-button-class" type="submit" value="Go to the page">
+        </form>
+    </div>
+        {%endif%}
+        
+        <form action="/danapp/home/">
+        <input class="custom-button-class" type="submit" value="Go home">
+        </form>
+        
+        {% endblock %}
+    </div>
+</body>
+</html>

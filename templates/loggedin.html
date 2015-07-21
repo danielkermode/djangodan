@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Logged in?{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+    
+        
+     
+    
+    <div class="user-custom">
+        <h2>You are logged in as {{user.username}}.</h2>
+        <img src="{{preferences.picture.url}}">
+        
+        <form action="" method="post" enctype="multipart/form-data">
+        <table>
+            {{ form.as_table }}
+        </table>
+        {% csrf_token %}
+        <input class="custom-button-class" type="submit" value="Change Preferences">
+        </form>
+    </div>
+    
+        {% if prefchanged %}
+            <p>Preferences changed.</p>  
+        {% endif %}
+        
+    
+    {% else %}
+        <p>Welcome. You aren't logged in. Go home to register or login.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Home page.{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="user-custom">
+<h4>This is the home page. Hello {{user.username}}.</h4>
+</div>
+{% else %}
+<h4>This is the home page. You aren't signed in yet.</h4>
+<form action="" method="get">
+    <p>
+    <input name="register" class="button secondary" type="submit" value="Register" />
+    </p>
+      <input name="login" class="button secondary" type="submit" value="Sign in" />
+{% endif %}
+     
+  </form>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Login.{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% else %}
+    <h2>Login (existing user)</h2>
+{% if stuffedup %}
+<p><font color="red">Invalid login.</font></p>
+{% endif %}
+
+    <form action="" method="post">
+        <table>
+            {{ form.as_table }}
+        </table>
+        {% csrf_token %}
+        <input class="button secondary" type="submit" value="Submit">
+    </form>
+    {% endif %}
+{% endblock %}
